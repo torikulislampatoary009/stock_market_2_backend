@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: volatility-api
+    runtime: python
+    plan: free
+    rootDir: backend          # remove this line if the repo contains only the backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --workers 1 --timeout 120 --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.3
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_NAME
+        sync: false
+      - key: DB_CA_CERT
+        sync: false
+      - key: CORS_ORIGINS
+        value: "*"
